@@ -10,52 +10,10 @@ web3j maven plugin is used to create java classes based on the solidity contract
 The base configuration for the plugin will take the solidity files from `src/main/resources` and generates 
 the java classes into the folder `src/main/java`.
 
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.web3j</groupId>
-            <artifactId>web3j-maven-plugin</artifactId>
-            <version>4.8.1</version>
-            <configuration>
-                <soliditySourceFiles/>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-```
-
-to run the plugin execute the goal `generate-sources`
-```bash
-mvn web3j:generate-sources
-```
-
-
-## Configuration
-The are several variable to select the solidity source files, define a source destination path or change the package name.
-
-| Name                   | Format                                                                                 | Default value                   |
-| -----------------------|----------------------------------------------------------------------------------------| --------------------------------|
-| `<packageName/>`       | valid java package name                                                                | `org.web3j.model`               |
-| `<outputDirectory><java/></outputDirectory>` | relative or absolute path of the generated for 'Java files       | value in `<sourceDestination/>` |
-| `<outputDirectory><bin/></outputDirectory>`  | relative or absolute path of the generated for 'Bin' files       | value in `<sourceDestination/>` |
-| `<outputDirectory><abi/></outputDirectory>`  | relative or absolute path of the generated for 'ABI' files       | value in `<sourceDestination/>` |
-| `<sourceDestination/>` | relative or absolute path of the generated files (java, bin, abi)                      | `src/main/java`                 |
-| `<outputFormat/>`      | generate Java Classes(`java`), ABI(`abi`) and/or BIN (`bin`) Files (comma separated)   | `java`                          |
-| `<nativeJavaType/>`    | Creates Java Native Types (instead of Solidity Types)                                  | `true`                          |
-| `<outputJavaParentContractClassName/>` | Sets custom(? extends org.web3j.tx.Contract) class as a parent for java generated code | `org.web3j.tx.Contract` |
-| `<soliditySourceFiles>`| Standard maven [fileset](https://maven.apache.org/shared/file-management/fileset.html) | `<soliditySourceFiles>`<br>`  <directory>src/main/resources</directory>`<br>`  <includes>`<br>`    <include>**/*.sol</include>`<br>`  </includes>`<br>`</soliditySourceFiles>`  |
-| `<abiSourceFiles>`     | Standard maven [fileset](https://maven.apache.org/shared/file-management/fileset.html) | `<abiSourceFiles>`<br>`  <directory>src/main/resources</directory>`<br>`  <includes>`<br>`    <include>**/*.json</include>`<br>`  </includes>`<br>`</abiSourceFiles>`           |
-| `<contract>`           | Filter (`<include>` or `<exclude>`) contracts based on the name.                       | `<contract>`<br>`  <includes>`<br>`    <include>greeter</include>`<br>`  </includes>`<br>`  <excludes>`<br>`    <exclude>mortal</exclude>`<br>`  <excludes>`<br>`</contracts>`  |
-| `<pathPrefixes>`       | A list (`<pathPrefixe>`) of replacements of dependency replacements inside Solidity contract.  |  |
-
-Configuration of `outputDirectory` has priority over `sourceDestination`
-
-
 ## Getting Started
 
 Create a standard java maven project. Add following `<plugin>` - configuration into the `pom.xml` file:
-web3j Maven plugin 的pom.xml檔案
+#web3j Maven plugin 的pom.xml檔案，執行此檔才能在Java中使用Web3j的套件
 
 ```xml
 <plugin>
@@ -98,7 +56,7 @@ web3j Maven plugin 的pom.xml檔案
     </configuration>
 </plugin>
 ```
-
+Web3j 原始碼的生成指令
 
 
 
