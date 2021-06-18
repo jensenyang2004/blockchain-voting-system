@@ -55,6 +55,7 @@ Configuration of `outputDirectory` has priority over `sourceDestination`
 ## Getting Started
 
 Create a standard java maven project. Add following `<plugin>` - configuration into the `pom.xml` file:
+web3j Maven plugin 的pom.xml檔案
 
 ```xml
 <plugin>
@@ -98,42 +99,7 @@ Create a standard java maven project. Add following `<plugin>` - configuration i
 </plugin>
 ```
 
-Add your solidity contract files into the folder `src/main/resources`. Make sure that the solidity files 
-ends with `.sol`.
 
-
-Start the generating process:
-
-
-```
-> mvn web3j:generate-sources
-
-[INFO] --- web3j-maven-plugin:0.1.2:generate-sources (default-cli) @ hotel-showcase ---
-[INFO] process 'HotelShowCaseProxy.sol'
-[INFO] 	Built Class for contract 'HotelShowCaseProxy'
-[INFO] 	Built Class for contract 'HotelShowCaseV2'
-[INFO] 	Built Class for contract 'Owned'
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 4.681 s
-[INFO] Finished at: 2017-06-13T07:07:04+02:00
-[INFO] Final Memory: 14M/187M
-[INFO] ------------------------------------------------------------------------
-
-Process finished with exit code 0
-```
-
-You find the generated java classes inside the directory `src/main/java/generated/`.
-
-Next step is to interact with the smart contract. See for that 
-[deploying and interacting with smart contracts](https://web3j.readthedocs.io/en/latest/smart_contracts.html#deploying-and-interacting-with-smart-contracts) 
-in the official web3j documentation.
-
-For a multi module project configuration see following [post](https://github.com/web3j/web3j-maven-plugin/issues/14) 
-from [@fcorneli](https://github.com/fcorneli). In short:  For pick up the generated java source 
-files, you need the build-helper-maven-plugin configuration. Also, `${basedir}` prefix is required 
-within a multi-module project.
 
 
 系統操作流程
