@@ -154,11 +154,14 @@ within a multi-module project.
 ![2021-06-18 (9)](https://user-images.githubusercontent.com/82329310/122497609-3912db00-d020-11eb-8322-699c6ec08411.png)
 
 接著管理者可以看到管理者的操縱畫面，有start ballot 跟 end ballot兩個按鈕，管理者按下 start ballot 後投票者才能開始投票，當管理者按下結束投票，管理者視窗會跳出最終結果畫面。
-但如果投票人要看到投票結果要按下顯示選舉結果按鈕，如果投票已經結束，才會顯示出結果視窗。
+但如果投票人要看到投票結果要按下顯示選舉結果按鈕，如果投票已經結束，才會顯示出結果視窗。另外refresh按鈕可以讓管理者在部屬合約時更新管理者畫面。
 
 ![2021-06-18 (12)](https://user-images.githubusercontent.com/82329310/122497911-c0604e80-d020-11eb-9d08-6e06af902db7.png)
+![2021-06-18 (8)](https://user-images.githubusercontent.com/82329310/122499381-6ca33480-d023-11eb-84f3-6b7e753fc322.png)
+
 
 結果頁面有每個候選人獲取的票數和當選者的名字顯示在最上方。
+
 
 
 
