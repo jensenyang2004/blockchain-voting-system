@@ -22,61 +22,76 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+
 public class Main {
 	
-	private final static String PRIVATE_KEY="7f6b15a2ce704d348a750b23e9b3b4ce0e117517c3db79a38b32573676d0be23";
+	private final static String PRIVATE_KEY="92c1a9a1e5efc3872b0d4778066d49572b5835bf1447c289700866e5bad676be";
 	
 	private final static BigInteger GAS_LIMIT=BigInteger.valueOf(6721975L);
 	private final static BigInteger GAS_PRICE=BigInteger.valueOf(20000000000L);
 	
 	private final static String RECIPIENT="0x767e33A42e85256CB7252227C85C5a6e881448A0";
 	
-	private final static String CONTRACT_ADDRESS ="0x06AC7868d57f907Dd9BDC11E8e92c3DfcE9F10f1";
+	private final static String CONTRACT_ADDRESS ="0x4A12B16C4F25181544D69a0f93A8F54b604d1413";
 	
 	private String INPUT_PRIVATE_KEY;
 	private String contract_address = CONTRACT_ADDRESS ;
 	
-	private boolean deploy = true;
+	private boolean deploy = false;
 	private boolean endvote = true;
 	public boolean if_start = false; 
+	public String font = "TimesRoman";
+	
+	Font  f3  = new Font("TimesRoman",  Font.PLAIN, 22);
+	ImageIcon icon = new ImageIcon("E:/web3j-maven-plugin-master/src/main/java/org/web3j/mavenplugin/ethereumlogo.png");
+	Image img=icon.getImage();
+	Image smallImage = img.getScaledInstance(60,96,Image.SCALE_DEFAULT);
+	ImageIcon smallIcon = new ImageIcon(smallImage);
 	
 	JFrame mainframe = new JFrame();
-	JFrame loginframe = new JFrame("login page");
+	JFrame loginframe = new JFrame("登入頁面");
 	JFrame adminframe = new JFrame("administration");
-	JFrame resultframe = new JFrame("final ballot result");
-	JFrame deployeframe = new JFrame("final ballot result");
+	JFrame resultframe = new JFrame("選舉結果");
+	JFrame deployeframe = new JFrame("DEPLOY THE CONTRACT");
+	JFrame testframe = new JFrame("test");
 	
 	JOptionPane pane = new JOptionPane("not real private key");
 	JOptionPane pane1 = new JOptionPane("not real private key");
 	
 	JTextField privatekey = new JTextField();
 	JTextField input = new JTextField();
+	JTextField[] candidatefill = new JTextField[3];
 	
-	JButton confirm = new JButton("confirm");
-	JButton showfinalresult = new JButton("FINAL RESULT");
+	JPanel canva = new JPanel();
+	
+	JButton confirm = new JButton("確認");
+	JButton showfinalresult = new JButton("顯示選舉結果");
 	JButton startballot = new JButton("start the ballot");
 	JButton endballot = new JButton("end the ballot");
 	JButton[] voteButton = new JButton[3];
 	JButton deployeButton = new JButton("DEPLOY CONTRACT");
+	JButton refresh = new JButton("REFRESH");
 //	JButton testButton = new JButton("system testing");
 	
 	
-	JLabel l = new JLabel("vote page");
-	JLabel login = new JLabel("VERSION 1.0");
+	JLabel l = new JLabel("投票頁面");
+	JLabel login = new JLabel("version 6.14");
 	JLabel[] candidate = new JLabel[3];
 	JLabel[] candidateadmin = new JLabel[3];
 	JLabel[] candidateresult = new JLabel[4];
+	JLabel systemlogo = new JLabel(smallIcon);
+	JLabel loginsign = new JLabel("登入投票系統");
 	
 	
 	Main(){
-		
 		mainframe.setBounds(0, 0, 500,700 );
 		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainframe.setVisible(false);
 		mainframe.setLayout(null);
-		mainframe.setResizable(false);
+		mainframe.setResizable(true);
 		
 		loginframe.setBounds(0, 0, 500,700 );
+		//loginframe.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		loginframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginframe.setVisible(true);
 		loginframe.setLayout(null);
@@ -84,80 +99,114 @@ public class Main {
 		
 		deployeframe.setBounds(0, 0, 500,700 );
 		deployeframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		if(deploy==false)
-		deployeframe.setVisible(true);
+		//if(deploy==false)
+		deployeframe.setVisible(false);
 		deployeframe.setLayout(null);
-		deployeframe.setResizable(false);
+		deployeframe.setResizable(true);
 		
 		adminframe.setBounds(0, 0, 500,700 );
 		adminframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		adminframe.setVisible(false);
 		adminframe.setLayout(null);
-		adminframe.setResizable(false);
-		
+		adminframe.setResizable(true);
 		
 		resultframe.setBounds(0, 0, 500,700 );
 		resultframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		resultframe.setVisible(false);
 		resultframe.setLayout(null);
-		resultframe.setResizable(false);
+		resultframe.setResizable(true);
+		
+//		testframe.setBounds(0, 0, 500,700 );
+//		testframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		testframe.setVisible(true);
+//		testframe.setLayout(null);
+//		testframe.setResizable(true);
+		
+//		canva.setBackground(Color.white);
+//		canva.setBounds(400,50,400,600);
+//		canva.setVisible(true);
+//		canva.setBackground(Color.black);
+//		loginframe.add(canva);
 		
 		
 		privatekey.setVisible(true);
-		privatekey.setBounds(150,200,200,30);
+		privatekey.setBounds(150,300,200,30);
+		privatekey.setBackground(Color.white);
 		loginframe.add(privatekey);
 		
 		input.setVisible(true);
 		input.setBounds(135,500,200,50);
 		//mainframe.add(input);
 		
-		confirm.setBounds(200,300,100,30);
+		confirm.setBounds(200,400,100,30);
+		confirm.setFont(new Font("微軟正黑體",Font.PLAIN, 14));
 		confirm.setLayout(null);
 		confirm.setVisible(true);
 		confirm.addActionListener(actionco);
+		confirm.setBackground(Color.LIGHT_GRAY);
 		loginframe.add(confirm);
 		
-		showfinalresult.setBounds(185,575,100,30);
+		showfinalresult.setBounds(170,575,150,30);
 		showfinalresult.setLayout(null);
 		showfinalresult.setVisible(true);
 		showfinalresult.addActionListener(actionco);
+		showfinalresult.setBackground(Color.LIGHT_GRAY);
+		showfinalresult.setFont(new Font("微軟正黑體",Font.PLAIN,14));
 		mainframe.add(showfinalresult);
 		
 		startballot.setBounds(155,500,150,30);
 		startballot.setVisible(true);
 		startballot.addActionListener(actionco);
+		startballot.setBackground(Color.LIGHT_GRAY);
 		adminframe.add(startballot);
 		
 		endballot.setBounds(155,550,150,30);
 		endballot.setVisible(true);
 		endballot.addActionListener(actionco);
+		endballot.setBackground(Color.LIGHT_GRAY);
 		adminframe.add(endballot);
 		
-		deployeButton.setBounds(155,550,150,100);
+		deployeButton.setBounds(155,550,180,100);
 		deployeButton.setVisible(true);
 		deployeButton.addActionListener(actionco);
+		deployeButton.setBackground(Color.LIGHT_GRAY);
 		deployeframe.add(deployeButton);
 		
-//		testButton.setVisible(true);
-//		testButton.setBounds(185, 600, 100, 30);
-//		testButton.addActionListener(actionco);
-//		mainframe.add(testButton);
+		refresh.setBounds(155,600,150,30);
+		refresh.setVisible(true);
+		refresh.addActionListener(actionco);
+		refresh.setBackground(Color.LIGHT_GRAY);
+		adminframe.add(refresh);
 		
 		l.setBounds(175, 50, 200, 80);
 		l.setVisible(true);
-		l.setFont(new Font("Cambria",Font.BOLD,30));
+		l.setFont(new Font("微軟正黑體",Font.BOLD,30));
 		mainframe.add(l);
 		
-		login.setBounds(150,50,300,80);
+		login.setBounds(0,0,100,20);
 		login.setVisible(true);
-		login.setFont(new Font("Cambria",Font.PLAIN,30));
+		login.setFont(new Font(font,Font.PLAIN,12));
+		login.setBackground(Color.BLUE);
 		loginframe.add(login);
+		
+		loginsign.setBounds(180,220,150,50);
+		loginsign.setVisible(true);
+		loginsign.setFont(new Font("微軟正黑體",Font.PLAIN,22));
+		loginsign.setBackground(Color.BLUE);
+		loginframe.add(loginsign);
+		
+		if(icon==null) {
+			pane1.showMessageDialog(null, "BALLOT HAVEN'T END", "ERROR", pane1.ERROR_MESSAGE);
+		}
+		systemlogo.setBounds(220,120,60,96);
+		systemlogo.setVisible(true);
+		loginframe.add(systemlogo);
 		
 		for(int i=0;i<3;i++) {
 			int temp=i*50;
 			candidate[i] = new JLabel(" ");
-			candidate[i].setBounds(150,210+temp,200,80);
-			candidate[i].setFont(new Font("Cambria",Font.PLAIN,22));
+			candidate[i].setBounds(120,210+temp,200,80);
+			candidate[i].setFont(f3);
 			mainframe.add(candidate[i]);
 			//adminframe.add(candidate[i]);
 		}
@@ -165,7 +214,7 @@ public class Main {
 			int temp=i*50;
 			candidateadmin[i] = new JLabel(" ");
 			candidateadmin[i].setBounds(150,150+temp,200,80);
-			candidateadmin[i].setFont(new Font("Cambria",Font.PLAIN,22));
+			candidateadmin[i].setFont(f3);
 			adminframe.add(candidateadmin[i]);
 			//adminframe.add(candidate[i]);
 		}
@@ -173,19 +222,27 @@ public class Main {
 			int temp=i*50;
 			candidateresult[i] = new JLabel(" ");
 			candidateresult[i].setBounds(100,150+temp,350,80);
-			candidateresult[i].setFont(new Font("Cambria",Font.PLAIN,22));
+			candidateresult[i].setFont(f3);
 			resultframe.add(candidateresult[i]);
 		}
 		for(int i=0;i<3;i++) {
 			int temp = i*50;
 			voteButton[i] = new JButton("vote");
 			voteButton[i].setVisible(true);
-			voteButton[i].setBounds(350,240+temp,100,30);
+			voteButton[i].setBounds(320,240+temp,100,30);
 			voteButton[i].addActionListener(actionco);
+			voteButton[i].setBackground(Color.LIGHT_GRAY);
 			mainframe.add(voteButton[i]);
 		}
+		for(int i=0;i<3;i++) {
+			int temp = i*80;
+			candidatefill[i]=new JTextField();
+			candidatefill[i].setVisible(true);
+			candidatefill[i].setBounds(100,240+temp,300,50);
+			candidatefill[i].setBackground(Color.white);
+			deployeframe.add(candidatefill[i]);
+		}
 	}
-	
 	private void printWeb3Version(Web3j web3j) {
 		Web3ClientVersion web3ClientVersion=null;
 		try {
@@ -200,7 +257,7 @@ public class Main {
 	/**
 	 * @throws Exception
 	 */
-	private void Main() throws Exception {
+	private void Main(String name1,String name2,String name3) throws Exception {
 		Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
 		
 		Credentials credentials = getCredentialsFromPrivateKey(PRIVATE_KEY);
@@ -209,7 +266,7 @@ public class Main {
      	contract_address = deployContract(web3j, credentials);
      	Election election = loadContract(contract_address,web3j, getCredentialsFromPrivateKey(PRIVATE_KEY));
      	
-     	input(election);
+     	input(election,name1,name2,name3);
      	
 	}
 	private void owner(Election election) throws Exception {
@@ -224,10 +281,10 @@ public class Main {
 		Election election= loadContract(contract_address, web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 		election.vote(BigInteger.valueOf(index_)).send();
 	}
-	private void input(Election election) throws Exception {
-		election.input("jensen").send();
-		election.input("reacheranderson").send();
-		election.input("barakobama").send();
+	private void input(Election election,String name1,String name2,String name3) throws Exception {
+		election.input(name1).send();
+		election.input(name2).send();
+		election.input(name3).send();
 	}
 	private void finalresult(Web3j web3j) throws Exception {
 		Election election= loadContract(contract_address, web3j, getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
@@ -255,11 +312,26 @@ public class Main {
 	        //System.out.println("nominee are: "+nominee);
 	    } 
 	}
-	public boolean ballotend(Web3j web3j , boolean wether_start) throws Exception {
+	public boolean ballotend() throws Exception {
+			Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
 			Election election = loadContract(contract_address, web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 			Election manager = loadContract(contract_address, web3j,getCredentialsFromPrivateKey(PRIVATE_KEY));
 			return manager.ballotend().send();
+			
 	} 
+	public void renew() throws Exception {
+		Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
+		Election election = loadContract(contract_address, web3j,getCredentialsFromPrivateKey(PRIVATE_KEY));
+		while(true) {
+			boolean temp = election.ballotend().send();
+			if(temp=false) {
+				if_start = true;
+				break;
+			}else {
+				continue;
+			}
+		}
+	}
 	private void transferEthereum(Web3j web3j, Credentials credentials) throws Exception{
 		TransactionManager transactionManager =new RawTransactionManager(
 				web3j,
@@ -300,6 +372,8 @@ public class Main {
 				if(privatekey.getText().equals(PRIVATE_KEY)) {
 					adminframe.setVisible(true);
 					loginframe.setVisible(false);
+					if(deploy==false)
+					deployeframe.setVisible(true);
 					INPUT_PRIVATE_KEY=privatekey.getText();
 					try {
 						showN(election);
@@ -328,11 +402,17 @@ public class Main {
 							// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+//					try {
+//						renew(web3j,election);
+//					} catch (Exception e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 				}
 			}else if(e.getSource()==showfinalresult) {
 				try {
 					while(true) {
-						boolean temp = ballotend(web3j,if_start);
+						boolean temp = ballotend();
 						if(temp==true) {
 							if(if_start==false) {
 								pane1.showMessageDialog(null, "BALLOT HAVEN'T START", "ERROR", pane1.ERROR_MESSAGE);
@@ -400,7 +480,7 @@ public class Main {
 			}else if(e.getSource()==voteButton[0]) {
 				try {
 					if(election.ballotend().send()==true) {
-						pane1.showMessageDialog(null, "BALLOT HAVEN'T STARTED OR HAVE ENDED", "ERROR", pane1.ERROR_MESSAGE);
+						pane1.showMessageDialog(null, "BALLOT HASN'T STARTED OR HAS ENDED", "ERROR", pane1.ERROR_MESSAGE);
 					}else {
 						if_start=true;
 					}
@@ -417,7 +497,7 @@ public class Main {
 			}else if(e.getSource()==voteButton[1]) {
 				try {
 					if(election.ballotend().send()==true) {
-						pane1.showMessageDialog(null, "BALLOT HAVEN'T STARTED OR HAVE ENDED", "ERROR", pane1.ERROR_MESSAGE);
+						pane1.showMessageDialog(null, "BALLOT HASN'T STARTED OR HAS ENDED", "ERROR", pane1.ERROR_MESSAGE);
 					}else {
 						if_start=true;
 					}
@@ -434,7 +514,7 @@ public class Main {
 			}else if(e.getSource()==voteButton[2]) {
 				try {
 					if(election.ballotend().send()==true) {
-						pane1.showMessageDialog(null, "BALLOT HAVEN'T STARTED OR HAVE ENDED", "ERROR", pane1.ERROR_MESSAGE);
+						pane1.showMessageDialog(null, "BALLOT HASN'T STARTED OR HAS ENDED", "ERROR", pane1.ERROR_MESSAGE);
 					}else {
 						if_start=true;
 					}
@@ -450,7 +530,8 @@ public class Main {
 				}
 			}else if(e.getSource()==deployeButton) {
 				try {
-					Main();
+					Main(candidatefill[0].getText(),candidatefill[1].getText(),candidatefill[2].getText());
+					//System.out.println(candidate[2].getText());
 					deploy = true;
 					//CONTRACT_ADDRESS = contract_address;
 					pane1.showMessageDialog(null, "DEPLOY SUCESS", "INFORMATION", pane1.INFORMATION_MESSAGE);
@@ -459,6 +540,13 @@ public class Main {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 					pane1.showMessageDialog(null, "DEPLOY FAIL","ERROR", pane1.ERROR_MESSAGE);
+				}
+			}else if(e.getSource()==refresh) {
+				try {
+					showN(election);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		}
