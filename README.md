@@ -1,3 +1,4 @@
+![2021-06-16 (12)](https://user-images.githubusercontent.com/82329310/122496997-47142c00-d01f-11eb-8357-15ae77a2207b.png)
 # web3j-maven-plugin
 [![Build Status](https://travis-ci.org/web3j/web3j-maven-plugin.svg?branch=master)](https://travis-ci.org/web3j/web3j-maven-plugin)
 [![codecov.io](https://codecov.io/github/web3j/web3j-maven-plugin/coverage.svg?branch=master)](https://codecov.io/github/web3j/web3j-maven-plugin?branch=master)
@@ -196,13 +197,15 @@ within a multi-module project.
 
 執行程式後會看到登入畫面，在文字框內輸入自己帳號的私鑰便可登入。
 
-![2021-06-16 (11)](https://user-images.githubusercontent.com/82329310/122493598-90ae4800-d01a-11eb-99fa-37876f4e5221.png)
+![2021-06-16 (12)](https://user-images.githubusercontent.com/82329310/122497022-5004fd80-d01f-11eb-812d-2b501348c725.png)
 
 如果登入者微系統預設管理者的私鑰則會出現部屬合約的視窗，管理者輸入候選人的名字後發布合約(預設候選人數為三個)。
 
 ![2021-06-18 (2)](https://user-images.githubusercontent.com/82329310/122495379-81c89500-d01c-11eb-969b-37ab40ff9373.png)
 
 看到跳出視窗代表合約部屬成功
+
+
 
 
 
