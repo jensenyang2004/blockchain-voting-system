@@ -26,16 +26,22 @@ import java.awt.*;
 public class Main {
 	
 	private final static String PRIVATE_KEY="92c1a9a1e5efc3872b0d4778066d49572b5835bf1447c289700866e5bad676be";
+	//此測試鏈中預設管理者的私鑰
 	
 	private final static BigInteger GAS_LIMIT=BigInteger.valueOf(6721975L);
 	private final static BigInteger GAS_PRICE=BigInteger.valueOf(20000000000L);
+	//部屬合約時會設定gas的價格和限制，是乙太坊避免重複交易等區塊練攻擊
 	
 	private final static String RECIPIENT="0x767e33A42e85256CB7252227C85C5a6e881448A0";
 	
 	private final static String CONTRACT_ADDRESS ="0x4A12B16C4F25181544D69a0f93A8F54b604d1413";
+	//預設的合約地址
 	
 	private String INPUT_PRIVATE_KEY;
+	//儲存登入者私鑰的字串
+	
 	private String contract_address = CONTRACT_ADDRESS ;
+	//儲存合約發布後的地址
 	
 	private boolean deploy = false;
 	private boolean endvote = true;
@@ -71,7 +77,6 @@ public class Main {
 	JButton[] voteButton = new JButton[3];
 	JButton deployeButton = new JButton("DEPLOY CONTRACT");
 	JButton refresh = new JButton("REFRESH");
-//	JButton testButton = new JButton("system testing");
 	
 	
 	JLabel l = new JLabel("投票頁面");
@@ -115,28 +120,11 @@ public class Main {
 		resultframe.setVisible(false);
 		resultframe.setLayout(null);
 		resultframe.setResizable(true);
-		
-//		testframe.setBounds(0, 0, 500,700 );
-//		testframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		testframe.setVisible(true);
-//		testframe.setLayout(null);
-//		testframe.setResizable(true);
-		
-//		canva.setBackground(Color.white);
-//		canva.setBounds(400,50,400,600);
-//		canva.setVisible(true);
-//		canva.setBackground(Color.black);
-//		loginframe.add(canva);
-		
-		
+
 		privatekey.setVisible(true);
 		privatekey.setBounds(150,300,200,30);
 		privatekey.setBackground(Color.white);
 		loginframe.add(privatekey);
-		
-		input.setVisible(true);
-		input.setBounds(135,500,200,50);
-		//mainframe.add(input);
 		
 		confirm.setBounds(200,400,100,30);
 		confirm.setFont(new Font("微軟正黑體",Font.PLAIN, 14));
@@ -243,17 +231,6 @@ public class Main {
 			deployeframe.add(candidatefill[i]);
 		}
 	}
-	private void printWeb3Version(Web3j web3j) {
-		Web3ClientVersion web3ClientVersion=null;
-		try {
-			web3ClientVersion = web3j.web3ClientVersion().send();
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		String web3ClientVersionstring = web3ClientVersion.getWeb3ClientVersion();
-		System.out.println("Web3 client version"+web3ClientVersionstring);
-		
-	}
 	/**
 	 * @throws Exception
 	 */
@@ -263,10 +240,10 @@ public class Main {
 		Credentials credentials = getCredentialsFromPrivateKey(PRIVATE_KEY);
 		
 		//String ContractAddress=deployContract(web3j,credentials);
-     	contract_address = deployContract(web3j, credentials);
-     	Election election = loadContract(contract_address,web3j, getCredentialsFromPrivateKey(PRIVATE_KEY));
-     	
-     	input(election,name1,name2,name3);
+     		contract_address = deployContract(web3j, credentials);
+     		Election election = loadContract(contract_address,web3j, getCredentialsFromPrivateKey(PRIVATE_KEY));
+     		
+     		input(election,name1,name2,name3);
      	
 	}
 	private void owner(Election election) throws Exception {
