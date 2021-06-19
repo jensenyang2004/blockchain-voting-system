@@ -1,3 +1,9 @@
+
+//所有呼叫智能合約上的方法，名字都何以solidity撰寫的智能合約方法一樣
+
+
+
+
 package org.web3j.mavenplugin;
 
 import org.web3j.crypto.CipherException;
