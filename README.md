@@ -62,8 +62,7 @@ Web3j 原始碼的生成指令
 
 系統操作流程
 
-
-![2021-06-16 (13)](https://user-images.githubusercontent.com/82329310/122493482-5cd32280-d01a-11eb-9e27-8ccc3de8e2f6.png)
+![2021-06-27 (9)](https://user-images.githubusercontent.com/82329310/123538168-12624c00-d766-11eb-8a3d-95fed0ada35a.png)
 
 執行程式後會看到登入畫面，在文字框內輸入自己帳號的私鑰便可登入。
 
@@ -75,13 +74,13 @@ Web3j 原始碼的生成指令
 
 看到跳出視窗代表合約部屬成功
 
-![2021-06-18 (9)](https://user-images.githubusercontent.com/82329310/122497609-3912db00-d020-11eb-8322-699c6ec08411.png)
-![2021-06-18 (8)](https://user-images.githubusercontent.com/82329310/122499381-6ca33480-d023-11eb-84f3-6b7e753fc322.png)
+![2021-06-27 (3)](https://user-images.githubusercontent.com/82329310/123538182-28700c80-d766-11eb-9ec9-1bd1f72aa62e.png)
+![2021-06-27 (5)](https://user-images.githubusercontent.com/82329310/123538192-31f97480-d766-11eb-8aaa-2d46800b755e.png)
 
 接著管理者可以看到管理者的操縱畫面，有start ballot 跟 end ballot兩個按鈕，管理者按下 start ballot 後投票者才能開始投票，當管理者按下結束投票，管理者視窗會跳出最終結果畫面。
 但如果投票人要看到投票結果要按下顯示選舉結果按鈕，如果投票已經結束，才會顯示出結果視窗。另外refresh按鈕可以讓管理者在部屬合約時更新管理者畫面。
 
-![2021-06-18 (12)](https://user-images.githubusercontent.com/82329310/122497911-c0604e80-d020-11eb-9d08-6e06af902db7.png)
+![2021-06-27 (8)](https://user-images.githubusercontent.com/82329310/123538199-3cb40980-d766-11eb-877e-61b04d12cabd.png)
 
 結果頁面有每個候選人獲取的票數和當選者的名字顯示在最上方。
 
