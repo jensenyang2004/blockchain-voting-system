@@ -62,7 +62,7 @@ Web3j 原始碼的生成指令
 
 系統操作流程
 
-下方流程都是在母合約發佈後才能進行的操作，要發佈母合約，必須透過Java程式來進行發佈
+下方流程都是在母合約發佈後才能進行的操作，要發佈母合約，必須透過Java程式來進行發佈，母合約發佈檔路徑 blockchain-voting-system/src/main/java/org/web3j/mavenplugin/Main2.java 
 
 ![2021-06-27 (9)](https://user-images.githubusercontent.com/82329310/123538168-12624c00-d766-11eb-8a3d-95fed0ada35a.png)
 
