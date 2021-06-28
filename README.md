@@ -66,7 +66,7 @@ Web3j 原始碼的生成指令
 
 ![2021-06-27 (9)](https://user-images.githubusercontent.com/82329310/123538168-12624c00-d766-11eb-8a3d-95fed0ada35a.png)
 
-執行程式後會看到登入畫面，在文字框內輸入自己帳號的私鑰便可登入。
+執行程式後會看到登入畫面，在文字框內輸入自己帳號的私鑰和地址便可登入。
 
 ![2021-06-16 (12)](https://user-images.githubusercontent.com/82329310/122497022-5004fd80-d01f-11eb-812d-2b501348c725.png)
 
