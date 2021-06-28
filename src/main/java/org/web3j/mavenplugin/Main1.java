@@ -32,19 +32,19 @@ public class Main1{
 	private final static BigInteger GAS_LIMIT=BigInteger.valueOf(6721975L);
 	private final static BigInteger GAS_PRICE=BigInteger.valueOf(20000000000L);
 	private final static String DEPLOYCONTRACT_ADDRESS = "0xe60ba7c07f084124827d21c3f8b6295b2c1570d7";
-		
-	private static String CONTRACT_ADDRESS ="";
+	//母合約的地址
 	
 	private String INPUT_PRIVATE_KEY;
-	private String contract_address = CONTRACT_ADDRESS ;
+	private String contract_address;
 	
-	private boolean deploy = false;
 	private boolean endvote = true;
 	public boolean if_start = false; 
+	//確認投票是否已經開始過
 	public String font = "TimesRoman";
 	
 	boolean check = false;
 	
+	//前端物件的宣告
 	Font  f3  = new Font("TimesRoman",  Font.PLAIN, 22);
 	Font  f4  = new Font("TimesRoman",  Font.PLAIN, 22);
 	ImageIcon icon = new ImageIcon("E:/web3j-maven-plugin-master/src/main/java/org/web3j/mavenplugin/ethereumlogo.png");
@@ -75,9 +75,7 @@ public class Main1{
 	JButton endballot = new JButton("end the ballot");
 	JButton[] voteButton = new JButton[3];
 	JButton deployeButton = new JButton("DEPLOY CONTRACT");
-	JButton refresh = new JButton("REFRESH");
-//	JButton testButton = new JButton("system testing");
-	
+	JButton refresh = new JButton("REFRESH");	
 	
 	JLabel l = new JLabel("投票頁面");
 	JLabel login = new JLabel("version 8.01 developing version");
@@ -125,18 +123,13 @@ public class Main1{
 		privatekey.setVisible(true);
 		privatekey.setBounds(150,360,200,30);
 		privatekey.setBackground(Color.LIGHT_GRAY);
-//		privatekey.setFont(f4);
 		loginframe.add(privatekey);
 		
 		inputaddress.setVisible(true);
 		inputaddress.setBounds(150,300,200,30);
 		inputaddress.setBackground(Color.LIGHT_GRAY);
 		loginframe.add(inputaddress);
-		
-		input.setVisible(true);
-		input.setBounds(135,500,200,50);
-		//mainframe.add(input);
-		
+				
 		confirm.setBounds(200,450,100,30);
 		confirm.setFont(new Font("微軟正黑體",Font.PLAIN, 14));
 		confirm.setLayout(null);
@@ -207,7 +200,6 @@ public class Main1{
 			candidate[i].setBounds(120,210+temp,200,80);
 			candidate[i].setFont(f3);
 			mainframe.add(candidate[i]);
-			//adminframe.add(candidate[i]);
 		}
 		for(int i=0;i<3;i++) {
 			int temp=i*50;
@@ -215,7 +207,6 @@ public class Main1{
 			candidateadmin[i].setBounds(150,150+temp,200,80);
 			candidateadmin[i].setFont(f3);
 			adminframe.add(candidateadmin[i]);
-			//adminframe.add(candidate[i]);
 		}
 		for(int i=0;i<4;i++) {
 			int temp=i*50;
@@ -258,45 +249,59 @@ public class Main1{
 	 */
 	private String getAddress() throws Exception {
 		Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
+		//與測試鏈取得聯繫
 		Deploycontract deploycontract = loadContract2(DEPLOYCONTRACT_ADDRESS,web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
+		//呼叫母合約
 		return deploycontract.electioncontract().send();
+		//回傳子合約的地址
 	}
 //	傳送合約地址
 	private void Main(String name1,String name2,String name3) throws Exception {
+		//此為發布合約的方法
+		
 		Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
+		//與測試鏈取得聯繫
 		
 		Credentials credentials = getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY);
 		
 		Deploycontract deploycontract = loadContract2(DEPLOYCONTRACT_ADDRESS,web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
+		//建立母合約物件
 		
 		deploycontract.depoy_contract().send();
-		//String ContractAddress=deployContract(web3j,credentials);
-     	//contract_address = deployContract(web3j, credentials);
-     	
-     	contract_address = getAddress();
-		pane1.showMessageDialog(null, contract_address, "INFORMATION", pane1.INFORMATION_MESSAGE);
-     	Editedelection election = loadContract(contract_address,web3j, getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
-     	
-     	input(election,name1,name2,name3);
+		//透過物件呼叫母合約的發布合約函式
+		     	
+     		contract_address = getAddress();
+		//取得子合約的地址
+		
+     		Editedelection election = loadContract(contract_address,web3j, getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
+		//與子合約取得聯繫
+		
+     		input(election,name1,name2,name3);
+		//管理者輸入候選人名稱
      	
 	}
 	private String owner(Editedelection election) throws Exception {
 		return election.owner().send();
+		//回傳合約的管理者，用在登入系統中
 	}
 	private void startballot(Editedelection election) {
 		election.startballot();
+		//開始投票方法
 	}
 	private void vote(Web3j web3j,String privatekey,String index) throws Exception {
 		int index_ = Integer.parseInt(index);
 		Editedelection election= loadContract(contract_address, web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 		election.vote(BigInteger.valueOf(index_)).send();
+		//投票方法
 	}
 	private void input(Editedelection election,String name1,String name2,String name3) throws Exception {
 		election.input(name1).send();
 		election.input(name2).send();
 		election.input(name3).send();
+		//輸入候選人名稱
 	}
 	private void finalresult(Web3j web3j) throws Exception {
+		//在最後結果畫面中，此方法讓結果畫面中顯示候選人的名稱和票數
 		Editedelection election= loadContract(contract_address, web3j, getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 		for(int i=0;i<3;i++) {
 			String result = election.finalresult(BigInteger.valueOf(i)).send().toString();
@@ -305,8 +310,8 @@ public class Main1{
 		}
 	}
 	private void winner(Web3j web3j,Editedelection election) throws Exception{
+		//顯示最後獲選者
 		String winner = election.winner().send().toString();
-		//System.out.println(winner);
 		candidateresult[0].setText("winner is : "+winner);
 	}
 	private void nominee(Editedelection election) throws Exception {
@@ -319,7 +324,6 @@ public class Main1{
 			String  nominee = election.showN(BigInteger.valueOf(i)).send().toString();
 			candidate[i].setText(temp+"."+nominee);
 			candidateadmin[i].setText(temp+"."+nominee);
-	        //System.out.println("nominee are: "+nominee);
 	    } 
 	}
 	public boolean ballotend() throws Exception {
