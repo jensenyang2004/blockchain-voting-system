@@ -29,13 +29,11 @@ contract editedelection{
     //建立多個儲存候選人結構的陣列
     
     constructor(address _owner) public{
-       //在建構子中輸入的變數為合約發布時就必須輸入的，在母合約中會自動將管理者(母合約發布者)的地址輸入此處，讓此合約的管理者與母合約的發布者一樣。
        token[owner].voted_if=true; 
        //使owner沒有投票權
-       owner = _owner;
-       //設定投票合約的管理者
        emit contract_address(address(this));
        //記錄此合約的地址以便其他前端程式進行讀取
+       owner=_owner;
     }
     
     modifier onlyowner(){
@@ -115,13 +113,14 @@ contract editedelection{
     
     function winner() public view returns(string memory){
         uint index1=0;
-        for(uint i=0;i<candidatecount-1;i++){
-            nominees storage show=nominee[i];
-            nominees storage show1=nominee[i+1];
-            if(show.total_votes>show1.total_votes){
+        uint temp=0;
+        for(uint i=0;i<candidatecount;i++){
+            nominees storage show1=nominee[i];
+            if(temp<show1.total_votes){
+                temp = show1.total_votes;
                 index1=i;
             }else{
-                index1=i+1;
+                temp = temp;
             }
         }
         nominees storage finalshow=nominee[index1];
