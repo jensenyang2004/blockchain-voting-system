@@ -78,6 +78,7 @@ public class Main1 extends Thread{
 	
 	JLabel l = new JLabel("投票頁面");
 	JLabel login = new JLabel("version 11.01");
+	//開發食用來標記版本
 	JLabel[] candidate = new JLabel[3];
 	JLabel[] candidateadmin = new JLabel[3];
 	JLabel[] candidateresult = new JLabel[4];
