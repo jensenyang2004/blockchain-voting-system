@@ -67,12 +67,14 @@ Web3j 原始碼的生成指令
 下方流程都是在母合約發佈後才能進行的操作，要發佈母合約，必須透過Java程式來進行發佈，母合約發佈檔路徑 blockchain-voting-system/src/main/java/org/web3j/mavenplugin/Main2.java 
 
 
-			登入畫面
+登入畫面
+-------
 ![2021-06-27 (9)](https://user-images.githubusercontent.com/82329310/123538168-12624c00-d766-11eb-8a3d-95fed0ada35a.png)
 
 執行程式後會看到登入畫面，在文字框內輸入自己帳號的私鑰和地址便可登入。
 
-			合約發布
+合約發布
+-------
 ![2021-06-16 (12)](https://user-images.githubusercontent.com/82329310/122497022-5004fd80-d01f-11eb-812d-2b501348c725.png)
 
 如果登入者微系統預設管理者的私鑰則會出現部屬合約的視窗，管理者輸入候選人的名字後發布合約(預設候選人數為三個)。
@@ -81,21 +83,25 @@ Web3j 原始碼的生成指令
 
 看到跳出視窗代表合約部屬成功
 
-			管理者畫面
+管理者畫面
+-------
 ![2021-06-27 (3)](https://user-images.githubusercontent.com/82329310/123538182-28700c80-d766-11eb-9ec9-1bd1f72aa62e.png)
 
-			投票者畫面
+投票者畫面
+-------
 ![2021-06-27 (5)](https://user-images.githubusercontent.com/82329310/123538192-31f97480-d766-11eb-8aaa-2d46800b755e.png)
 
 接著管理者可以看到管理者的操縱畫面，有start ballot 跟 end ballot兩個按鈕，管理者按下 start ballot 後投票者才能開始投票，當管理者按下結束投票，管理者視窗會跳出最終結果畫面。
 但如果投票人要看到投票結果要按下顯示選舉結果按鈕，如果投票已經結束，才會顯示出結果視窗。另外refresh按鈕可以讓管理者在部屬合約時更新管理者畫面。
 
-			  結果畫面
+結果畫面
+-------
 ![2021-06-27 (8)](https://user-images.githubusercontent.com/82329310/123538199-3cb40980-d766-11eb-877e-61b04d12cabd.png)
 
 結果頁面有每個候選人獲取的票數和當選者的名字顯示在最上方。
 
-		 Ganache-cli畫面
+Ganache-cli畫面
+-------
 ![2021-08-09 (9)](https://user-images.githubusercontent.com/82329310/128650541-255ab7a4-2786-436c-985e-b35f1de86c52.png)
 ![2021-08-09 (7)](https://user-images.githubusercontent.com/82329310/128650544-e7f5816d-ef49-4244-917b-3fc257cef7c6.png)
 因為UI介面的ganache測試鏈出現問題，使用架構相同ganache-cli來當作測試鏈，上突圍測練啟動時的情況。
