@@ -106,10 +106,3 @@ Ganache-cli畫面
 ![1](https://user-images.githubusercontent.com/82329310/128651971-3c119968-a41a-4431-af2f-da837edb53b1.png)
 ![2](https://user-images.githubusercontent.com/82329310/128651977-a617425c-c26b-4e3b-8f41-f4a7dc01ead3.png)
 ![3](https://user-images.githubusercontent.com/82329310/128651983-088d6678-3d5b-46db-9109-258718d0dca8.png)
-
-
-![2021-08-09 (7)](https://user-images.githubusercontent.com/82329310/128650544-e7f5816d-ef49-4244-917b-3fc257cef7c6.png)
-
-
-![2021-08-08 (2)](https://user-images.githubusercontent.com/82329310/128636549-bf2450e1-8b00-4608-8c65-ee78e344eae3.png)
-母合約發佈後透過母合約進行子合約的發布，和回傳合約地址。
