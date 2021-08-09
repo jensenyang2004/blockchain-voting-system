@@ -102,7 +102,7 @@ Web3j 原始碼的生成指令
 
 Ganache-cli畫面
 -------
-        因為UI介面的ganache測試鏈出現問題，使用架構相同ganache-cli來當作測試鏈，上突圍測練啟動時的情況。
+    因為UI介面的ganache測試鏈出現問題，使用架構相同ganache-cli來當作測試鏈。
 ![1](https://user-images.githubusercontent.com/82329310/128651971-3c119968-a41a-4431-af2f-da837edb53b1.png)
 ![2](https://user-images.githubusercontent.com/82329310/128651977-a617425c-c26b-4e3b-8f41-f4a7dc01ead3.png)
 ![3](https://user-images.githubusercontent.com/82329310/128651983-088d6678-3d5b-46db-9109-258718d0dca8.png)
