@@ -88,8 +88,8 @@ Web3j 原始碼的生成指令
 
 結果頁面有每個候選人獲取的票數和當選者的名字顯示在最上方。
 
-![2021-08-09 (5)](https://user-images.githubusercontent.com/82329310/128650266-844dbbd7-e786-4fad-9e71-6a9c9c53a8e7.png)
-![2021-08-09 (6)](https://user-images.githubusercontent.com/82329310/128650270-49c79ec5-f774-4053-a18a-f2af468df7dc.png)
+![2021-08-09 (9)](https://user-images.githubusercontent.com/82329310/128650541-255ab7a4-2786-436c-985e-b35f1de86c52.png)
+![2021-08-09 (7)](https://user-images.githubusercontent.com/82329310/128650544-e7f5816d-ef49-4244-917b-3fc257cef7c6.png)
 因為UI介面的ganache測試鏈出現問題，使用架構相同ganache-cli來當作測試鏈，上突圍測練啟動時的情況。
 
 
