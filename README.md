@@ -1,4 +1,3 @@
-![2021-06-16 (12)](https://user-images.githubusercontent.com/82329310/122496997-47142c00-d01f-11eb-8357-15ae77a2207b.png)
 # web3j-maven-plugin
 [![Build Status](https://travis-ci.org/web3j/web3j-maven-plugin.svg?branch=master)](https://travis-ci.org/web3j/web3j-maven-plugin)
 [![codecov.io](https://codecov.io/github/web3j/web3j-maven-plugin/coverage.svg?branch=master)](https://codecov.io/github/web3j/web3j-maven-plugin?branch=master)
