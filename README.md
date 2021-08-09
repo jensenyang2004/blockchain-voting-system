@@ -106,3 +106,10 @@ Ganache-cli畫面
 ![1](https://user-images.githubusercontent.com/82329310/128651971-3c119968-a41a-4431-af2f-da837edb53b1.png)
 ![2](https://user-images.githubusercontent.com/82329310/128651977-a617425c-c26b-4e3b-8f41-f4a7dc01ead3.png)
 ![3](https://user-images.githubusercontent.com/82329310/128651983-088d6678-3d5b-46db-9109-258718d0dca8.png)
+
+Ganache畫面
+-----
+    原本使用的ganache畫面
+![image](https://user-images.githubusercontent.com/82329310/128652195-908ba5e0-4d9c-41e0-af61-9862d71ee7bd.png)
+
+
