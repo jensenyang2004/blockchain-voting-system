@@ -32,8 +32,10 @@ public class Main1 extends Thread{
 	private final static BigInteger GAS_LIMIT=BigInteger.valueOf(6721975L);
 	private final static BigInteger GAS_PRICE=BigInteger.valueOf(20000000000L);
 	private final static String DEPLOYCONTRACT_ADDRESS = "0x5514cf4599cf3db59e481f478b6d777428fa7d49";
+	//母合約地址，系統運行前就被加入程式碼中
 		
 	private static String CONTRACT_ADDRESS ="";
+	//用以記錄子合約的地址
 	
 	private String INPUT_PRIVATE_KEY;
 	private String contract_address = CONTRACT_ADDRESS ;
@@ -201,16 +203,10 @@ public class Main1 extends Thread{
 		loginsign.setBackground(Color.BLUE);
 		loginP.add(loginsign);
 		
-		if(icon==null) {
-			JOptionPane.showMessageDialog(null, "BALLOT HAVEN'T END", "ERROR", JOptionPane.ERROR_MESSAGE);
-		}
 		systemlogo.setBounds(220,120,60,96);
 		systemlogo.setVisible(true);
 		loginP.add(systemlogo);
 		
-		if(icon==null) {
-			JOptionPane.showMessageDialog(null, "BALLOT HAVEN'T END", "ERROR", JOptionPane.ERROR_MESSAGE);
-		}
 		loadL.setBounds(150,170,200,200);
 		loadL.setVisible(true);
 		loadP.add(loadL);
@@ -257,13 +253,13 @@ public class Main1 extends Thread{
 	/**
 	 * @throws Exception
 	 */
-	private String getAddress() throws Exception {
+	private String getAddress() throws Exception {//從母合約取得子合約地址
 		Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
 		Deploycontract deploycontract = loadContract2(DEPLOYCONTRACT_ADDRESS,web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 		return deploycontract.electioncontract().send();
 	}
-//	傳送合約地址
-	private void Main(String name1,String name2,String name3) throws Exception {
+	
+	private void Main(String name1,String name2,String name3) throws Exception { //發布投票合約(子合約)
 		Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
 		
 		Credentials credentials = getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY);
@@ -271,77 +267,61 @@ public class Main1 extends Thread{
 		Deploycontract deploycontract = loadContract2(DEPLOYCONTRACT_ADDRESS,web3j,credentials);
 		
 		deploycontract.depoy_contract().send();
-		VOTE_END();
      	
-     	contract_address = getAddress();
+     		contract_address = getAddress();
 		JOptionPane.showMessageDialog(null, contract_address, "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-     	Editedelection election = loadContract(contract_address,web3j,credentials);
+     		Editedelection election = loadContract(contract_address,web3j,credentials);
      	
-     	input(election,name1,name2,name3);
+     		input(election,name1,name2,name3);
      	
 	}
 	private void VOTE_END() {
 		Web3j web3j = Web3j.build(new HttpService("http://localhost:7545"));
-		//Editedelection election= loadContract(contract_address, web3j, getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 		EthFilter filter = new EthFilter(DefaultBlockParameterName.EARLIEST, DefaultBlockParameterName.LATEST, contract_address);
 		web3j.ethLogFlowable(filter).subscribe(log->      System.out.println(log.toString()));
 	}
-	private String owner(Editedelection election) throws Exception {
+	private String owner(Editedelection election) throws Exception { //回傳管理者的地址，再登入時用來確認登入者輸入的地址是否為管理者的
 		return election.owner().send();
 	}
-	private void vote(Web3j web3j,String privatekey,String index) throws Exception {
+	private void vote(Web3j web3j,String privatekey,String index) throws Exception {//投票功能
 		int index_ = Integer.parseInt(index);
 		Editedelection election= loadContract(contract_address, web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 		election.vote(BigInteger.valueOf(index_)).send();
 	}
-	private void input(Editedelection election,String name1,String name2,String name3) throws Exception {
+	private void input(Editedelection election,String name1,String name2,String name3) throws Exception {//管理者發布合約時輸入候選人姓名
 		election.input(name1).send();
 		election.input(name2).send();
 		election.input(name3).send();
 	}
-	private void finalresult(Web3j web3j) throws Exception {
+	private void finalresult(Web3j web3j) throws Exception {//顯示出選舉結果
 		Editedelection election= loadContract(contract_address, web3j, getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 		for(int i=0;i<3;i++) {
 			String result = election.finalresult(BigInteger.valueOf(i)).send().toString();
+			//呼叫合約中舊有的回傳候選人票數方法
 			String nominee = election.showN(BigInteger.valueOf(i)).send().toString();
 			candidateresult[i+1].setText(i+1+"."+nominee+" "+result+"votes");
 		}
 	}
-	private void winner(Web3j web3j,Editedelection election) throws Exception{
+	private void winner(Web3j web3j,Editedelection election) throws Exception{//顯示選舉獲勝者
 		String winner = election.winner().send().toString();
 		candidateresult[0].setText("winner is : "+winner);
 	}
-	private void showN(Editedelection election) throws Exception{
+	private void showN(Editedelection election) throws Exception{//此方法用來將候選人資料顯示在投票者和管理者的視窗內
 		for (int i=0;i<3;i++) {
 			int temp=i+1;
 			String  nominee = election.showN(BigInteger.valueOf(i)).send().toString();
 			candidate[i].setText(temp+"."+nominee);
 			candidateadmin[i].setText(temp+"."+nominee);
-	        //System.out.println("nominee are: "+nominee);
 	    } 
 	}
-	public boolean ballotend() throws Exception {
+	public boolean ballotend() throws Exception {//管理者結束投票
 			Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
 			Editedelection election = loadContract(contract_address, web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
 			return election.ballotend().send();
 	} 
-	public void renew() throws Exception {
-		while(true) {
-			if(check) {
-				Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
-				Editedelection election = loadContract(contract_address, web3j,getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
-				boolean temp = election.ballotend().send();
-				if(temp=false) {
-					if_start = true;
-					break;
-				}else {
-					System.out.println("haven't start");
-					continue;
-				}
-			}
-		}
-	}
-	public void run() {
+	
+	public void run() { //此方法非常重要，城市開始時他將不斷向區塊鏈網路確認投票是否已經開始，才不會出現投票已經結束投票者系統卻以為投票還沒開始的情況
+		//此方法使用執行序，已讓投票系統其他功能運作下，他能夠以背景程式的形式不斷執行
 		while(true) {
 			try {
 				Thread.sleep(1000);
@@ -367,22 +347,22 @@ public class Main1 extends Thread{
 			}else {}
 		}
 	}
-	private Credentials getCredentialsFromPrivateKey(String privatekey) {
+	private Credentials getCredentialsFromPrivateKey(String privatekey) {//使用私鑰來取得帳戶資料
 		return Credentials.create(privatekey);
 	}
-	private String deployContract2(Web3j web3j, Credentials credentials) throws Exception {
+	private String deployContract2(Web3j web3j, Credentials credentials) throws Exception {//發布投票合約
 		return Deploycontract.deploy(web3j, credentials,GAS_PRICE,GAS_LIMIT).send().getContractAddress();
 	}
-	private Editedelection loadContract(String contractaddress,Web3j web3j,Credentials credentials) {
+	private Editedelection loadContract(String contractaddress,Web3j web3j,Credentials credentials) {//透過合約地址取得與合約的聯繫
 		return Editedelection.load(contractaddress, web3j, credentials, GAS_PRICE,GAS_LIMIT);
 	}
-	private Deploycontract loadContract2(String contractaddress,Web3j web3j,Credentials credentials) {
+	private Deploycontract loadContract2(String contractaddress,Web3j web3j,Credentials credentials) {//透過合約地址取得與合約的聯繫
 		return Deploycontract.load(contractaddress, web3j, credentials, GAS_PRICE,GAS_LIMIT);
 	}
-	public ActionListener actionco = new ActionListener() {
+	public ActionListener actionco = new ActionListener() {//使用者介面的事件頃聽器
 		public void actionPerformed(ActionEvent e) {
 			Web3j web3j=Web3j.build(new HttpService("http://localhost:7545"));
-			if(e.getSource()==confirm) {
+			if(e.getSource()==confirm) {//登入畫面的確認鈕
 				INPUT_PRIVATE_KEY=privatekey.getText();
 				try {
 					contract_address = getAddress();
@@ -390,16 +370,13 @@ public class Main1 extends Thread{
 					// TODO Auto-generated catch block+
 					e3.printStackTrace();
 					JOptionPane.showMessageDialog(null, "can't get the contract address", "ERROR", JOptionPane.ERROR_MESSAGE);
+					//當合約還沒發布
 				}
 				try {
 					Credentials credentialtest = getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY);
-					try {
-						Editedelection election = loadContract(contract_address,web3j, getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY));
-					}catch(Exception e2) {
-						JOptionPane.showMessageDialog(null, "contract hasn't been deployed", "ERROR", JOptionPane.ERROR_MESSAGE);
-					}
 				}catch(Exception e1){
 					JOptionPane.showMessageDialog(null, "ACCOUNT NOT EXIST", "ERROR", JOptionPane.ERROR_MESSAGE);
+					//如果登入者所輸入的私鑰不存在於區塊鏈上
 				}
 				Credentials credential = getCredentialsFromPrivateKey(INPUT_PRIVATE_KEY);
 				if(credential.getAddress().toLowerCase().equals(inputaddress.getText().toLowerCase())){
