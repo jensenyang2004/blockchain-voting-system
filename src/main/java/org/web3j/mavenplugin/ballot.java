@@ -1,10 +1,8 @@
 package org.web3j.mavenplugin;
 
-public class ballot {
-	public static void main(String[] args) throws Exception {
-		Main a = new Main();
-		Main b = new Main();
-		//Main b = new Main();
-		//Main b = new Main();
+public class ballot01 {
+	public static void main(String[] args) throws Exception{
+		Main1 a = new Main1();
+		a.start();
 	}
 }
