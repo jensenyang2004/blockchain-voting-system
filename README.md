@@ -55,6 +55,15 @@ Create a standard java maven project. Add following `<plugin>` - configuration i
     </configuration>
 </plugin>
 ```
+
+個程式碼路徑
+---
+    投票合約程式碼:
+    母合約程式碼:
+    主系統程式碼:
+
+
+
 Web3j 原始碼的生成指令
 
 ![1_IVmYRWgQ4yw_aaUNJXdMfw](https://user-images.githubusercontent.com/82329310/122502299-f1dd1800-d028-11eb-9fe1-72233e3e3910.png)
