@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-個程式碼路徑
+各程式碼路徑
 ---
     投票合約程式碼:
     母合約程式碼:
