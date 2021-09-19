@@ -3,58 +3,6 @@
 [![codecov.io](https://codecov.io/github/web3j/web3j-maven-plugin/coverage.svg?branch=master)](https://codecov.io/github/web3j/web3j-maven-plugin?branch=master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-web3j maven plugin is used to create java classes based on the solidity contract files.
-
-## Usage
-The base configuration for the plugin will take the solidity files from `src/main/resources` and generates 
-the java classes into the folder `src/main/java`.
-
-## Getting Started
-
-Create a standard java maven project. Add following `<plugin>` - configuration into the `pom.xml` file:
-#web3j Maven plugin 的pom.xml檔案，執行此檔才能在Java中使用Web3j的套件
-
-```xml
-<plugin>
-    <groupId>org.web3j</groupId>
-    <artifactId>web3j-maven-plugin</artifactId>
-    <version>4.8.1</version>
-    <configuration>
-        <packageName>com.zuehlke.blockchain.model</packageName>
-        <sourceDestination>src/main/java/generated</sourceDestination>
-        <nativeJavaType>true</nativeJavaType>
-        <outputFormat>java,bin</outputFormat>
-        <soliditySourceFiles>
-            <directory>src/main/resources</directory>
-            <includes>
-                <include>**/*.sol</include>
-            </includes>
-        </soliditySourceFiles>
-        <abiSourceFiles>
-            <directory>src/main/resources</directory>
-            <includes>
-                <include>**/*.json</include>
-            </includes>
-        </abiSourceFiles>
-        <outputDirectory>
-            <java>src/java/generated</java>
-            <bin>src/bin/generated</bin>
-            <abi>src/abi/generated</abi>
-        </outputDirectory>
-        <contract>
-            <includes>
-                <include>greeter</include>
-            </includes>
-            <excludes>
-                <exclude>mortal</exclude>
-            </excludes>
-        </contract>
-        <pathPrefixes>
-            <pathPrefix>dep=../dependencies</pathPrefix>
-        </pathPrefixes>
-    </configuration>
-</plugin>
-```
 
 個程式碼路徑
 ---
