@@ -7,13 +7,13 @@
 # 程式碼原始路徑
   ## 投票合約程式碼路徑:
   ### 複製檔路徑:blockchain-voting-system/投票合約.sol
-  ### blockchain-voting-system/src/main/resources/out/editedelection.sol
+ 
   ## 母合約程式碼路徑:
   ### 複製檔路徑:blockchain-voting-system/母合約.sol
-  ### blockchain-voting-system/src/main/resources/out/deploycontract.sol
+
   ## 主系統程式碼路徑:
   ### 複製檔路徑:blockchain-voting-system/系統主程式碼.java
-  ### blockchain-voting-system/src/main/java/org/web3j/mavenplugin/Main1.java
+
 
 
 
