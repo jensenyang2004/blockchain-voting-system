@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 authors:
-  - family-names: 楊
-    given-names: 景丞
+  - family-names: Yang
+    given-names: Jing Cheng
 title: "blockchain voting system"
 version: 11.01
 date-released: 2021-09-30
